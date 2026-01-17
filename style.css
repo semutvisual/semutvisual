@@ -81,20 +81,46 @@ body {
     transform: translateY(-5px);
 }
 
-.card-bg {
+/* Card Backgrounds (New Img Structure) */
+.card-bg-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
     z-index: -1;
-    transition: transform 0.5s ease;
+    overflow: hidden;
 }
 
-.card:hover .card-bg {
-    transform: scale(1.05);
+.card-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+}
+
+.card-overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 60%);
+    z-index: 1;
+}
+
+.card:hover .card-bg-img {
+    transform: scale(1.08);
 }
 
 /* Content Styling */
@@ -116,7 +142,7 @@ body {
 .hero-card .content {
     justify-content: center;
     text-align: center;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+    /* Background removed here as it's now in .card-overlay */
 }
 
 .hero-card h1 {
@@ -128,7 +154,7 @@ body {
 }
 
 .hero-card p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 30px;
     opacity: 0.9;
@@ -153,7 +179,7 @@ body {
     justify-content: center;
     color: white;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
 }
@@ -161,13 +187,17 @@ body {
 .icon-btn:hover {
     background: white;
     color: #333;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
 /* Contact Card */
 .contact-card {
-    background: rgba(30, 25, 20, 0.6);
+    background: rgba(30, 25, 20, 0.4);
+    /* More transparent for glass feel */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .contact-card h2 {
@@ -197,8 +227,9 @@ body {
 }
 
 .contact-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-color: white;
+    transform: translateX(5px);
 }
 
 /* Portfolio Cards */
@@ -207,7 +238,7 @@ body {
 }
 
 .portfolio-card .content {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 60%);
+    /* Gradient removed here as it's now in .card-overlay-gradient */
     justify-content: flex-end;
 }
 
@@ -242,6 +273,10 @@ body {
 .action-btn:hover {
     background: white;
     color: #333;
+    width: 100%;
+    /* subtle expansion check? maybe not needed */
+    padding-right: 30px;
+    /* Slight mental cues */
 }
 
 /* Footer */
@@ -252,33 +287,79 @@ body {
 }
 
 .badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
 }
 
-/* Animations */
+/* Animations & Scroll Reveal */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeIn 0.8s ease forwards;
+    animation: fadeIn 1s ease forwards;
 }
 
 .delay-1 {
-    animation-delay: 0.2s;
+    transition-delay: 0.1s;
+    animation-delay: 0.1s;
 }
 
 .delay-2 {
-    animation-delay: 0.4s;
+    transition-delay: 0.2s;
+    animation-delay: 0.2s;
 }
 
 @keyframes fadeIn {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Subtle Floating Animation for hero elements */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Responsiveness Tweaks */
+@media (max-width: 380px) {
+    .hero-card h1 {
+        font-size: 2rem;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .portfolio-card {
+        height: 400px;
     }
 }
 
