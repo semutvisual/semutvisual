@@ -31,7 +31,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    /* Changed from 100% to 100vh to prevent resize on mobile scroll */
     background-image: url('assets/bg.webp');
     background-size: cover;
     background-position: center;
@@ -140,6 +141,9 @@ body {
 
 .hero-card {
     height: 60vh;
+    /* Fallback */
+    height: 60svh;
+    /* Stable height on mobile (ignores address bar resize) */
     min-height: 500px;
     justify-content: center;
 }
