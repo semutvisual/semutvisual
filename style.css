@@ -38,6 +38,9 @@ body {
     background-repeat: no-repeat;
     z-index: -2;
     filter: brightness(0.6);
+    transform: translateZ(0);
+    /* Hardware acceleration to prevent jitter */
+    will-change: transform;
 }
 
 .noise-overlay {
@@ -119,8 +122,10 @@ body {
     z-index: 1;
 }
 
-.card:hover .card-bg-img {
-    transform: scale(1.08);
+@media (hover: hover) {
+    .card:hover .card-bg-img {
+        transform: scale(1.08);
+    }
 }
 
 /* Content Styling */
