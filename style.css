@@ -271,8 +271,9 @@ body {
     justify-content: flex-end;
 }
 
-.portfolio-card h2 {
-    font-size: 2rem;
+.portfolio-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
     margin-bottom: 10px;
     font-weight: 500;
 }
