@@ -161,6 +161,8 @@ body {
 }
 
 .hero-card h1 {
+    font-size: 2em;
+    /* Explicit base size to fix UserAgent warning */
     margin-bottom: 20px;
     line-height: 1.2;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -181,9 +183,6 @@ body {
     font-size: 3.5rem;
     font-weight: 600;
     letter-spacing: -1px;
-    /* Use italic if it feels too stiff, but usually regular Cormorant is elegant enough. 
-       User said "latin nya ga terlalu latin bgt" (cursive but not too cursive). 
-       Cormorant Italic is quite cursive-like. Let's try Italic as it often matches that description for Serifs. */
     font-style: italic;
 }
 
@@ -229,7 +228,6 @@ body {
 
 /* Contact Card */
 .contact-card {
-    /* Background removed to show image */
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -271,7 +269,6 @@ body {
 }
 
 .portfolio-card .content {
-    /* Gradient removed here as it's now in .card-overlay-gradient */
     justify-content: flex-end;
 }
 
@@ -308,9 +305,7 @@ body {
     background: white;
     color: #333;
     width: 100%;
-    /* subtle expansion check? maybe not needed */
     padding-right: 30px;
-    /* Slight mental cues */
 }
 
 /* Footer */
@@ -324,7 +319,6 @@ body {
     background: var(--glass-bg);
     padding: 8px 20px;
     border-radius: 50px;
-    /* Pillow shape for modern look */
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -335,6 +329,23 @@ body {
 
 .badge:hover {
     background: rgba(255, 255, 255, 0.15);
+}
+
+/* Optimized Hero Animation (CSS only, no JS delay) */
+.hero-animate {
+    animation: heroFadeIn 1s ease-out forwards;
+}
+
+@keyframes heroFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Animations & Scroll Reveal */
@@ -373,7 +384,6 @@ body {
     }
 }
 
-/* Subtle Floating Animation for hero elements */
 @keyframes float {
     0% {
         transform: translateY(0px);
@@ -390,6 +400,12 @@ body {
 
 /* Responsiveness Tweaks */
 @media (max-width: 380px) {
+
+    /* Disable noise on very low end mobile for performance */
+    .noise-overlay {
+        display: none;
+    }
+
     .brand-text {
         font-size: 2.8rem;
     }
