@@ -1,12 +1,13 @@
 :root {
-    --primary-font: 'Outfit', sans-serif;
-    --card-radius: 32px;
+    /* --primary-font removed as it was unused (Outfit) */
+    --card-radius: 24px;
+    /* Slightly tighter radius for neater look */
     --text-color: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.8);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --overlay-dark: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%, rbga(0, 0, 0, 0) 100%);
-    --overlay-hero: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%);
+    --text-secondary: rgba(255, 255, 255, 0.85);
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --overlay-dark: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0) 100%);
+    --overlay-hero: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 * {
@@ -78,9 +79,13 @@ body {
     min-height: 250px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     border: 1px solid var(--glass-border);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+    background: var(--glass-bg);
+    /* Fallback/Base */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .card:hover {
@@ -218,9 +223,9 @@ body {
 
 .icon-btn:hover {
     background: white;
-    color: #333;
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    color: #1a1a1a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
 }
 
 /* Contact Card */
@@ -317,14 +322,20 @@ body {
 }
 
 .badge {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
+    background: var(--glass-bg);
+    padding: 8px 20px;
+    border-radius: 50px;
+    /* Pillow shape for modern look */
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 2px;
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(5px);
+    transition: background 0.3s ease;
+}
+
+.badge:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* Animations & Scroll Reveal */
