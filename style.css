@@ -331,15 +331,23 @@ body {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* Optimized Hero Animation (CSS only, no JS delay) */
+/* Optimized Hero Animation */
+/* The Card container is visible immediately for LCP */
 .hero-animate {
-    animation: heroFadeIn 1s ease-out forwards;
+    /* No opacity fade on the container so usage of background image is instant */
+    transform: translateY(0);
 }
 
-@keyframes heroFadeIn {
+/* Animate ONLY the text content inside */
+.hero-animate .content {
+    animation: contentFadeIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes contentFadeIn {
     0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
 
     100% {
